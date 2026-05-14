@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import Counter from "./Counter";
+import { useAuth } from "../context/AuthContext";
 
 export default function HeroSection() {
   const navigate = useNavigate();
+  const { requireAuth } = useAuth();
   const nav = (path) => { 
     navigate(path); 
     window.scrollTo({ top: 0, behavior: "smooth" }); 
@@ -35,10 +37,10 @@ export default function HeroSection() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <button onClick={() => nav("/apply")} className="flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl font-bold text-base shadow-2xl shadow-blue-500/30 hover:scale-105 hover:shadow-blue-500/50 transition-all duration-200">
+              <button onClick={() => requireAuth(() => nav("/apply"))} className="flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl font-bold text-base shadow-2xl shadow-blue-500/30 hover:scale-105 hover:shadow-blue-500/50 transition-all duration-200">
                 Apply Now <span className="text-lg">→</span>
               </button>
-              <button onClick={() => { document.getElementById("eligibility")?.scrollIntoView({ behavior: "smooth" }); }} className="flex items-center gap-2 px-8 py-4 bg-white/10 border border-white/20 text-white rounded-xl font-bold text-base backdrop-blur-sm hover:bg-white/20 transition-all duration-200">
+              <button onClick={() => requireAuth(() => { document.getElementById("eligibility")?.scrollIntoView({ behavior: "smooth" }); })} className="flex items-center gap-2 px-8 py-4 bg-white/10 border border-white/20 text-white rounded-xl font-bold text-base backdrop-blur-sm hover:bg-white/20 transition-all duration-200">
                 Check Eligibility
               </button>
             </div>

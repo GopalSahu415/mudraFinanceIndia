@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function LoanDetails({ type }) {
   const navigate = useNavigate();
+  const { requireAuth } = useAuth();
 
   const config = {
     "home-loan": { icon: "🏠", title: "Home Loan", tagline: "Make Your Dream Home a Reality", color: "from-blue-500 to-cyan-500", tenure: "30 years", max: "₹5 Crore", features: ["Up to 90% funding of property value", "Flexible tenure up to 30 years", "Tax benefits under Section 80C & 24", "Balance transfer facility available", "Top-up loans available", "Quick processing through our network"], docs: ["Aadhaar & PAN Card", "Last 3 months salary slips", "6 months bank statements", "Property documents", "ITR for 2 years", "Form 16"] },
@@ -27,7 +29,7 @@ export default function LoanDetails({ type }) {
               </div>
             ))}
           </div>
-          <button onClick={() => { navigate("/apply"); window.scrollTo({ top: 0, behavior: "smooth" }); }} className="px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl font-black shadow-2xl hover:scale-105 transition-all">Apply Now →</button>
+          <button onClick={() => requireAuth(() => { navigate("/apply"); window.scrollTo({ top: 0, behavior: "smooth" }); })} className="px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl font-black shadow-2xl hover:scale-105 transition-all">Apply Now →</button>
         </div>
       </div>
 

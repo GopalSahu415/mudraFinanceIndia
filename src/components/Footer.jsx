@@ -1,8 +1,18 @@
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function Footer() {
   const navigate = useNavigate();
+  const { requireAuth } = useAuth();
+  
   const nav = (path) => { 
+    if (path === "/apply") {
+      requireAuth(() => {
+        navigate(path);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+      return;
+    }
     navigate(path); 
     window.scrollTo({ top: 0, behavior: "smooth" }); 
   };

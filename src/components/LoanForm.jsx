@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { useInView } from "../hooks/useInView";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from "../context/AuthContext";
 
 export default function LoanForm() {
   const [ref, visible] = useInView(0.1);
+  const { user, requireAuth } = useAuth();
   const [form, setForm] = useState({ name: "", mobile: "", email: "", loanType: "", amount: "", state: "" });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
@@ -61,34 +63,55 @@ export default function LoanForm() {
       toast.error("Please fix the errors in the form before submitting.");
       return;
     }
-    
-    setLoading(true);
-    
-    const formData = new FormData(e.target);
-
-    try {
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData
+    if (!user) {
+      toast.info("Please login or create an account to continue your loan application.", {
+        icon: '🔒',
+        style: {
+          background: '#1e293b',
+          color: '#fff',
+          border: '1px solid #334155'
+        }
       });
-      
-      const data = await res.json();
-      
-      if (data.success) {
-        toast.success("Loan form submitted successfully. Our team will contact you within 24 hours.");
-        setForm({ name: "", mobile: "", email: "", loanType: "", amount: "", state: "" });
-        
-        // Start 30 seconds cooldown
-        localStorage.setItem("lastSubmitTime", Date.now().toString());
-        setCooldown(30);
-      } else {
-        throw new Error(data.message || "Something went wrong!");
-      }
-    } catch (error) {
-      toast.error(error.message || "Submission failed. Please check your connection and try again.");
-    } finally { 
-      setLoading(false); 
     }
+    
+    requireAuth(async () => {
+      setLoading(true);
+      
+      const formData = new FormData();
+      formData.append("access_key", "1b6a9362-e824-4db4-98e9-f6553378059a");
+      formData.append("subject", "New Loan Lead - MudraFinanceIndia");
+      formData.append("from_name", "MudraFinanceIndia Lead");
+      formData.append("name", form.name);
+      formData.append("mobile", form.mobile);
+      formData.append("email", form.email);
+      formData.append("loanType", form.loanType);
+      formData.append("amount", form.amount);
+      formData.append("state", form.state);
+
+      try {
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: formData
+        });
+        
+        const data = await res.json();
+        
+        if (data.success) {
+          toast.success("Loan form submitted successfully. Our team will contact you within 24 hours.");
+          setForm({ name: "", mobile: "", email: "", loanType: "", amount: "", state: "" });
+          
+          // Start 30 seconds cooldown
+          localStorage.setItem("lastSubmitTime", Date.now().toString());
+          setCooldown(30);
+        } else {
+          throw new Error(data.message || "Something went wrong!");
+        }
+      } catch (error) {
+        toast.error(error.message || "Submission failed. Please check your connection and try again.");
+      } finally { 
+        setLoading(false); 
+      }
+    });
   };
 
   const inp = "w-full px-4 py-3.5 rounded-xl border text-slate-900 text-sm font-medium placeholder-slate-400 outline-none transition-all duration-200 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500";

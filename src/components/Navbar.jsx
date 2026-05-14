@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { FiUser, FiLogOut } from "react-icons/fi";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -7,6 +9,7 @@ export default function Navbar() {
   const [loanOpen, setLoanOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { user, logout, openLogin, openRegister, requireAuth } = useAuth();
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);
@@ -76,7 +79,30 @@ export default function Navbar() {
 
           {/* CTA + Hamburger */}
           <div className="flex items-center gap-3">
-            <button onClick={() => nav("/apply")} className="hidden sm:flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-sm font-bold shadow-lg hover:shadow-blue-500/40 hover:scale-105 transition-all duration-200">
+            {!user ? (
+              <div className="hidden md:flex items-center gap-2 mr-2">
+                <button onClick={openLogin} className="px-4 py-2 rounded-xl text-sm font-semibold text-white/90 hover:text-white hover:bg-white/10 transition-colors">
+                  Login
+                </button>
+                <button onClick={openRegister} className="px-4 py-2 rounded-xl text-sm font-semibold bg-white/10 text-white hover:bg-white/20 transition-colors border border-white/10">
+                  Register
+                </button>
+              </div>
+            ) : (
+              <div className="hidden md:flex items-center gap-3 mr-2 bg-white/5 pl-2 pr-4 py-1.5 rounded-full border border-white/10">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 flex items-center justify-center text-white font-bold shadow-inner">
+                  {user.name.charAt(0).toUpperCase()}
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xs font-semibold text-white leading-tight">{user.name.split(" ")[0]}</span>
+                  <button onClick={logout} className="text-[10px] text-slate-400 hover:text-red-400 text-left transition-colors flex items-center gap-1">
+                    <FiLogOut /> Logout
+                  </button>
+                </div>
+              </div>
+            )}
+            
+            <button onClick={() => requireAuth(() => nav("/apply"))} className="hidden sm:flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl text-sm font-bold shadow-lg hover:shadow-blue-500/40 hover:scale-105 transition-all duration-200">
               Apply Now <span>→</span>
             </button>
             <button onClick={() => setMenuOpen(!menuOpen)} className="lg:hidden p-2 rounded-lg transition-colors text-white hover:bg-white/10">
@@ -108,7 +134,35 @@ export default function Navbar() {
               {loans.map(l => <button key={l.path} onClick={() => nav(l.path)} className="w-full text-left px-4 py-2.5 rounded-lg text-sm text-slate-400 font-medium hover:bg-slate-800 hover:text-white transition-colors">{l.label}</button>)}
             </div>}
           </div>
-          <button onClick={() => nav("/apply")} className="w-full mt-2 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-bold text-sm">Apply Now →</button>
+          <button onClick={() => requireAuth(() => nav("/apply"))} className="w-full mt-2 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-bold text-sm">Apply Now →</button>
+          
+          <div className="pt-4 mt-2 border-t border-slate-800">
+            {!user ? (
+              <div className="grid grid-cols-2 gap-3">
+                <button onClick={() => { setMenuOpen(false); openLogin(); }} className="w-full py-2.5 rounded-lg text-sm font-semibold text-slate-300 bg-slate-800 hover:bg-slate-700 transition-colors">
+                  Login
+                </button>
+                <button onClick={() => { setMenuOpen(false); openRegister(); }} className="w-full py-2.5 rounded-lg text-sm font-semibold text-white bg-white/10 hover:bg-white/20 transition-colors border border-white/10">
+                  Register
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center justify-between bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 flex items-center justify-center text-white font-bold shadow-inner">
+                    {user.name.charAt(0).toUpperCase()}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-white">{user.name}</p>
+                    <p className="text-xs text-slate-400">{user.email}</p>
+                  </div>
+                </div>
+                <button onClick={() => { setMenuOpen(false); logout(); }} className="p-2 text-slate-400 hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-colors">
+                  <FiLogOut size={18} />
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </nav>
