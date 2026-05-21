@@ -3,12 +3,12 @@ import { useInView } from "../hooks/useInView";
 export default function Testimonials() {
   const [ref, visible] = useInView();
   const testimonials = [
-    { name: "Priya Mehta", city: "Mumbai, Maharashtra", review: "MudraFinanceIndia made my home loan process incredibly smooth. Within 48 hours, I had three competitive offers in hand. Highly recommended!", rating: 5, initials: "PM", color: "from-blue-500 to-indigo-500" },
+    { name: "Priya Mehta", city: "Mumbai, Maharashtra", review: "RupeeBridge made my home loan process incredibly smooth. Within 48 hours, I had three competitive offers in hand. Highly recommended!", rating: 5, initials: "PM", color: "from-blue-500 to-indigo-500" },
     { name: "Rajesh Kumar", city: "Bengaluru, Karnataka", review: "Got my business loan sanctioned within a week with their help. The team was professional and guided me throughout the documentation process.", rating: 5, initials: "RK", color: "from-emerald-500 to-teal-500" },
-    { name: "Sunita Agarwal", city: "Delhi, NCR", review: "I was skeptical at first, but MudraFinance connected me with a great lender for my personal loan. The process was transparent and hassle-free.", rating: 5, initials: "SA", color: "from-purple-500 to-pink-500" },
+    { name: "Sunita Agarwal", city: "Delhi, NCR", review: "I was skeptical at first, but RupeeBridge connected me with a great lender for my personal loan. The process was transparent and hassle-free.", rating: 5, initials: "SA", color: "from-purple-500 to-pink-500" },
     { name: "Amit Singh", city: "Pune, Maharashtra", review: "Excellent service! Applied for a car loan and got approved faster than I expected. The interest rate offered was lower than what my bank quoted.", rating: 4, initials: "AS", color: "from-orange-500 to-amber-500" },
     { name: "Kavitha Reddy", city: "Hyderabad, Telangana", review: "Very professional platform. The loan expert called me within an hour of form submission and helped me get the best deal for my home loan.", rating: 5, initials: "KR", color: "from-cyan-500 to-blue-500" },
-    { name: "Vikram Joshi", city: "Ahmedabad, Gujarat", review: "Smooth experience from start to finish. MudraFinanceIndia's partner bank gave me much better terms than my existing bank. Thank you!", rating: 5, initials: "VJ", color: "from-rose-500 to-red-500" },
+    { name: "Vikram Joshi", city: "Ahmedabad, Gujarat", review: "Smooth experience from start to finish. RupeeBridge's partner bank gave me much better terms than my existing bank. Thank you!", rating: 5, initials: "VJ", color: "from-rose-500 to-red-500" },
   ];
 
   return (

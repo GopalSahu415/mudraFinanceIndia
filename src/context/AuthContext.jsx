@@ -13,14 +13,14 @@ export const AuthProvider = ({ children }) => {
 
   // Load user from localStorage on mount
   useEffect(() => {
-    const storedUser = localStorage.getItem("mudraUser");
+    const storedUser = localStorage.getItem("rupeeBridgeUser");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
   }, []);
 
   const login = (email, password) => {
-    const usersStr = localStorage.getItem("mudraUsers");
+    const usersStr = localStorage.getItem("rupeeBridgeUsers");
     const users = usersStr ? JSON.parse(usersStr) : [];
     
     const foundUser = users.find(u => u.email === email && u.password === password);
@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
     if (foundUser) {
       const userData = { name: foundUser.name, email: foundUser.email };
       setUser(userData);
-      localStorage.setItem("mudraUser", JSON.stringify(userData));
+      localStorage.setItem("rupeeBridgeUser", JSON.stringify(userData));
       toast.success("Login successful!");
       closeModals();
       
@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = (name, email, password) => {
-    const usersStr = localStorage.getItem("mudraUsers");
+    const usersStr = localStorage.getItem("rupeeBridgeUsers");
     const users = usersStr ? JSON.parse(usersStr) : [];
     
     if (users.find(u => u.email === email)) {
@@ -55,12 +55,12 @@ export const AuthProvider = ({ children }) => {
     
     const newUser = { name, email, password };
     users.push(newUser);
-    localStorage.setItem("mudraUsers", JSON.stringify(users));
+    localStorage.setItem("rupeeBridgeUsers", JSON.stringify(users));
     
     // Auto login
     const userData = { name, email };
     setUser(userData);
-    localStorage.setItem("mudraUser", JSON.stringify(userData));
+    localStorage.setItem("rupeeBridgeUser", JSON.stringify(userData));
     toast.success("Account created successfully!");
     closeModals();
 
@@ -74,7 +74,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("mudraUser");
+    localStorage.removeItem("rupeeBridgeUser");
     toast.success("Logged out successfully!");
   };
 

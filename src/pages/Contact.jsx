@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { useToast } from "../context/ToastContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function Contact() {
   const setToast = useToast();
+  const { requireAuth } = useAuth();
   const [form, setForm] = useState({ name: "", email: "", mobile: "", message: "" });
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
+    requireAuth(async () => {
+      setLoading(true);
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ access_key: "YOUR_WEB3FORMS_ACCESS_KEY", subject: "Contact Form - MudraFinanceIndia", ...form }),
+        body: JSON.stringify({ access_key: "3d6cde7a-e7ff-4820-8cb5-66bfe60ef9d4", subject: "Contact Form - RupeeBridge", ...form }),
       });
       if (res.ok) { 
         setToast({ msg: "Message sent! We'll get back to you within 24 hours.", type: "success" }); 
@@ -21,11 +24,12 @@ export default function Contact() {
       } else {
         throw new Error();
       }
-    } catch { 
-      setToast({ msg: "Failed to send message. Please try again.", type: "error" }); 
-    } finally { 
-      setLoading(false); 
-    }
+      } catch { 
+        setToast({ msg: "Failed to send message. Please try again.", type: "error" }); 
+      } finally { 
+        setLoading(false); 
+      }
+    });
   };
 
   const inp = "w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm font-medium placeholder-slate-400 outline-none transition-all focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 hover:border-slate-300";
@@ -46,7 +50,7 @@ export default function Contact() {
               {[
                 { icon: "📍", title: "Office Address", val: "123, Finance Tower, Connaught Place\nNew Delhi – 110001, India" },
                 { icon: "📞", title: "Phone Number", val: "+91 98765 43210\n+91 11 4567 8900" },
-                { icon: "✉️", title: "Email Address", val: "support@mudrafinanceindia.com\nloans@mudrafinanceindia.com" },
+                { icon: "✉️", title: "Email Address", val: "support@rupeebridge.com\nloans@rupeebridge.com" },
                 { icon: "🕐", title: "Business Hours", val: "Monday – Saturday: 9:00 AM – 6:00 PM\nSunday: Closed" },
               ].map(c => (
                 <div key={c.title} className="flex gap-4 p-5 bg-slate-50 rounded-2xl">

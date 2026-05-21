@@ -33,8 +33,8 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center"><span className="text-white font-black text-sm">M</span></div>
-              <div><p className="font-black text-base">MudraFinance</p><p className="text-blue-400 text-[10px] font-bold tracking-widest uppercase">India</p></div>
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center"><span className="text-white font-black text-sm">R</span></div>
+              <div><p className="font-black text-base">RupeeBridge</p></div>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed mb-4">India's trusted loan assistance platform helping you connect with the best financial partners for all your loan needs.</p>
             <div className="flex gap-3">
@@ -68,7 +68,7 @@ export default function Footer() {
             <div className="space-y-3 text-sm text-slate-400">
               <div className="flex items-start gap-2"><span>📍</span><p>123, Finance Tower, Connaught Place, New Delhi – 110001</p></div>
               <div className="flex items-center gap-2"><span>📞</span><p>+91 98765 43210</p></div>
-              <div className="flex items-center gap-2"><span>✉️</span><p>support@mudrafinanceindia.com</p></div>
+              <div className="flex items-center gap-2"><span>✉️</span><p>support@rupeebridge.com</p></div>
               <div className="flex items-center gap-2"><span>🕐</span><p>Mon–Sat, 9 AM – 6 PM</p></div>
             </div>
           </div>
@@ -77,10 +77,10 @@ export default function Footer() {
         {/* Disclaimer */}
         <div className="border-t border-slate-800 pt-8 space-y-4">
           <div className="bg-slate-900 rounded-xl p-4 text-xs text-slate-500 leading-relaxed">
-            <strong className="text-slate-400">Disclaimer:</strong> We are not a direct lender. We only help users connect with financial service providers and loan partners. MudraFinanceIndia is an independent financial service platform and is not associated with any government organization or scheme. Loan approval is at the sole discretion of the respective lending institution. Interest rates and terms are subject to change without notice.
+            <strong className="text-slate-400">Disclaimer:</strong> We are not a direct lender. We only help users connect with financial service providers and loan partners. RupeeBridge is an independent financial service platform and is not associated with any government organization or scheme. Loan approval is at the sole discretion of the respective lending institution. Interest rates and terms are subject to change without notice.
           </div>
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-slate-600">
-            <p>© {new Date().getFullYear()} MudraFinanceIndia. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} RupeeBridge. All rights reserved.</p>
             <div className="flex gap-4">
               <button onClick={() => nav("/privacy")} className="hover:text-slate-400 transition-colors">Privacy Policy</button>
               <button onClick={() => nav("/terms")} className="hover:text-slate-400 transition-colors">Terms & Conditions</button>

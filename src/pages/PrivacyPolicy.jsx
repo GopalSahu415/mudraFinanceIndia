@@ -11,9 +11,9 @@ export default function PrivacyPolicy() {
           ["2. How We Use Your Information", "Your information is used to: connect you with suitable lending partners, process your loan application, communicate with you about your application status, improve our services, and comply with legal obligations."],
           ["3. Data Sharing", "We share your information only with our verified lending partners (banks and NBFCs) for the purpose of processing your loan application. We do not sell your personal data to third parties."],
           ["4. Data Security", "We implement industry-standard security measures including SSL encryption, secure servers, and regular security audits to protect your personal information."],
-          ["5. Your Rights", "You have the right to access, correct, or delete your personal data. To exercise these rights, contact us at privacy@mudrafinanceindia.com."],
+          ["5. Your Rights", "You have the right to access, correct, or delete your personal data. To exercise these rights, contact us at privacy@rupeebridge.com."],
           ["6. Cookies", "We use cookies to enhance your browsing experience. You can control cookie preferences through your browser settings."],
-          ["7. Contact Us", "For privacy-related queries, contact our Data Protection Officer at: privacy@mudrafinanceindia.com or call +91 98765 43210."],
+          ["7. Contact Us", "For privacy-related queries, contact our Data Protection Officer at: privacy@rupeebridge.com or call +91 98765 43210."],
         ].map(([title, content]) => (
           <div key={title} className="mb-8">
             <h2 className="text-xl font-black text-slate-900 mb-3">{title}</h2>

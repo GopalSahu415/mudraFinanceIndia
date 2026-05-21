@@ -19,7 +19,7 @@ export default function WhyChooseUs() {
           <div className={`transition-all duration-700 ${visible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"}`}>
             <span className="text-blue-600 font-bold text-sm uppercase tracking-widest">Why Choose Us</span>
             <h2 className="text-3xl sm:text-4xl font-black text-slate-900 mt-3 mb-6">Your Trusted Financial Partner in India</h2>
-            <p className="text-slate-500 leading-relaxed mb-8">MudraFinanceIndia bridges the gap between borrowers and India's top financial institutions. We simplify the loan process so you can focus on what matters most — achieving your financial goals.</p>
+            <p className="text-slate-500 leading-relaxed mb-8">RupeeBridge bridges the gap between borrowers and India's top financial institutions. We simplify the loan process so you can focus on what matters most — achieving your financial goals.</p>
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="flex items-center gap-3 bg-blue-50 rounded-xl px-5 py-4">
                 <span className="text-2xl">🏆</span>

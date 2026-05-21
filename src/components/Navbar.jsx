@@ -41,11 +41,10 @@ export default function Navbar() {
           {/* Logo */}
           <button onClick={() => nav("/")} className="flex items-center gap-2 group">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-              <span className="text-white font-black text-sm">M</span>
+              <span className="text-white font-black text-sm">R</span>
             </div>
             <div className="text-left">
-              <p className="font-black text-base leading-none tracking-tight transition-colors text-white">MudraFinance</p>
-              <p className="text-[10px] font-semibold tracking-widest uppercase transition-colors text-blue-400">India</p>
+              <p className="font-black text-base leading-none tracking-tight transition-colors text-white">RupeeBridge</p>
             </div>
           </button>
 
